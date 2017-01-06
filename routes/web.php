@@ -19,5 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/tasks', 'TaskController@index');
-Route::post('/task', 'TaskController@store');
+
 Route::delete('/task/{task}', 'TaskController@destroy');
+Route::post('/task/edit/{id}', 'TaskController@index');
+Route::post('/task', 'TaskController@store');
+Route::post('/task/{id}', 'TaskController@store');
+
+Route::get('/react_tasks', 'TaskController@reactTasks');

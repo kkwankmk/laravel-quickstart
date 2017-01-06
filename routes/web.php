@@ -25,4 +25,6 @@ Route::post('/task/edit/{id}', 'TaskController@index');
 Route::post('/task', 'TaskController@store');
 Route::post('/task/{id}', 'TaskController@store');
 
+Route::get('/welcome', 'TaskController@reactTasks');
 Route::get('/react_tasks', 'TaskController@reactTasks');
+Route::get('/flux_tasks', 'TaskController@reactTasks');

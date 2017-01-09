@@ -17,4 +17,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::resource('/api/tasks', 'API\TaskApiController');
+
+
+Route::group(['middleware' => 'auth:api', 'namespace' => 'API'], function () {
+	Route::resource('/tasks', 'TaskApiController');
+});

@@ -40,7 +40,7 @@ class TaskApiController extends Controller
      */
     public function store(Request $request)
     {
-        print_r($request->all());
+        // print_r($request->all());
         $task = $request->user()->tasks()->create([
             'name' => $request->name,
         ]);
@@ -108,10 +108,12 @@ class TaskApiController extends Controller
     {
          $task = $request->user()->tasks()->find($id);
          $id = $task->id;
+         $name = $task->name;
          $task->delete();
 
         return response()->json([
             'id' => $id,
+            'name' => $name,
             'status' => 'delete success'
         ]);
     }

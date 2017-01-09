@@ -7,6 +7,9 @@ import FluxTaskItem from './FluxTaskItem';
 class FluxTaskListApp extends Component {
 
   render() {
+    if (!this.props.ready) {
+      return <h1>Loading...</h1>;
+    }
     return (
     	<div>
         <form className="form-horizontal">
@@ -61,7 +64,6 @@ class FluxTaskListApp extends Component {
     let task_name = this.props.task_name;
     if (this.props.status == false) {
       ActionCreators.saveEditList(this.props.task_id, task_name);
-      // console.log('ssssss');
     } else {
       if (task_name == "") {
         alert('The name field is required.');
@@ -79,6 +81,7 @@ class FluxTaskListApp extends Component {
 }
 
 FluxTaskListApp.propTypes = {
+  ready: PropTypes.bool,
   task_list: PropTypes.array,
   task_name: PropTypes.string,
   task_id: PropTypes.string,

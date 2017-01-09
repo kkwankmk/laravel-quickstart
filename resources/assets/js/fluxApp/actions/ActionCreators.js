@@ -1,7 +1,18 @@
 import AppDispatcher from '../AppDispatcher';
 import constants from '../constants';
+import Util from '../Util';
+
+import TaskApi from '../api/TaskApi';
 
 let ActionCreators = {
+
+  getTasks() {
+    AppDispatcher.dispatchAsync(TaskApi.getTasks(), {
+      request: constants.GET_TASK,
+      success: constants.GET_TASK_SUCCESS,
+      failure: constants.GET_TASK_ERROR
+    });
+  },
 
   updateTaskName(task_name) {
     AppDispatcher.dispatch({
@@ -11,17 +22,20 @@ let ActionCreators = {
   },
 
   addTask(task_name) {
-    AppDispatcher.dispatch({
-      type: constants.ADD_TASK,
-      payload: {task_name}
-    });
+    let task_id = Util.getId();
+    AppDispatcher.dispatchAsync(TaskApi.addTask(task_name), {
+      request: constants.ADD_TASK,
+      success: constants.ADD_TASK_SUCCESS,
+      failure: constants.ADD_TASK_ERROR
+    }, {task_id, task_name});
   },
 
-  deleteList(id) {
-    AppDispatcher.dispatch({
-      type: constants.DELETE_LIST,
-      payload: {id}
-    });
+  deleteList(id, name) {
+    AppDispatcher.dispatchAsync(TaskApi.deleteList(id), {
+      request: constants.DELETE_LIST,
+      success: constants.DELETE_LIST_SUCCESS,
+      failure: constants.DELETE_LIST_ERROR
+    }, {id, name});
   },
 
   editList(id, name) {
@@ -32,12 +46,12 @@ let ActionCreators = {
   },
 
   saveEditList(id, name) {
-    AppDispatcher.dispatch({
-        type: constants.SAVE_EDIT_LIST,
-        payload: {id, name}
-      });
-    },
-
+    AppDispatcher.dispatchAsync(TaskApi.saveEditList(id, name), {
+      request: constants.SAVE_EDIT_LIST,
+      success: constants.SAVE_EDIT_LIST_SUCCESS,
+      failure: constants.SAVE_EDIT_LIST_ERROR
+    }, {id, name});
+  },
 };
 
 export default ActionCreators;

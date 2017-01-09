@@ -14,18 +14,18 @@ class FluxTaskItem extends Component {
                 <button className="btn btn-primary" onClick={this.editList.bind(this, this.props.id, this.props.name)}>Edit</button>
             </td>
             <td className="table-text">
-                <button className="btn btn-danger" onClick={this.deleteList.bind(this, this.props.id)}>Delete</button>
+                <button className="btn btn-danger" onClick={this.deleteList.bind(this, this.props.id, this.props.name)}>Delete</button>
             </td>
         </tr>
     );
   }
 
-  deleteList(id){
-    console.log('delete -->', id);
-    ActionCreators.deleteList(id);
+  deleteList(id, name){
+    // console.log('delete -->', id);
+    ActionCreators.deleteList(id, name);
   }
   editList(id, name){
-    console.log('edit -->', id, name);
+    // console.log('edit -->', id, name);
     ActionCreators.editList(id, name);
     // var editState = {...this.state};
     // editState.task_name = name;
